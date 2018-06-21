@@ -14,6 +14,7 @@ def test_addition():
     assert soln.addition(1,2) == 3, "Failed for adding"
 
 def test_smallest_factor():
+    assert soln.smallest_factor(1) == 1, "Failed for 1"
     assert soln.smallest_factor(2)==2, "Failed for 2"
     assert soln.smallest_factor(6)==2, "Failed for composite number"
     assert soln.smallest_factor(7)==7, "Failed for prime number"
@@ -77,7 +78,7 @@ def test_complex_division(set_up_complex_nums):
     # assert number_3 / number_3 == soln.ComplexNumber(1, 1)
     with pytest.raises(ValueError) as excinfo:
         temp2 =soln.ComplexNumber(0,0)
-        number_1 / temp2
+        number_1.__truediv__(temp2)
     assert excinfo.value.args[0] == "Cannot divide by zero"
 
 
@@ -92,7 +93,7 @@ def test_complex_eq(set_up_complex_nums):
 
 def test_complex_init(set_up_complex_nums):
     number_1, number_2, number_3 = set_up_complex_nums
-    print (number_1.real==1)
+    # print (number_1.real==1)
     assert number_1.real == 1 , "Real part not setting up correctly"
     assert number_1.imag == 2, "Imaginary part not setting up correctly"
 
@@ -109,7 +110,7 @@ def test_month():
     assert soln.month_length("January") == 31, "failed for 31-day months"
     assert soln.month_length("February") == 28, "failed for non-leap feb"
     assert soln.month_length("February", True) == 29, "failed for non-leap feb"
-
+    assert soln.month_length("asd") == None, "failed for jibberish"
 # Problem 4: Write test cases for the Set game.
 # cards = ["1022", "1122", "0100", "2021",
 # "0010", "2201", "2111", "0020",
@@ -117,7 +118,39 @@ def test_month():
 
 @pytest.fixture
 def set_up_cards():
-    cards_1 = [ "1022", "1122", "1020"]
-    cards_1 = ["1022", "1122", "0100", "2021",
+    cards_1 = ["1022", "1122", "1020"]
+    cards_2 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "0)10", "2110", "1020"]
+    cards_3 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "010", "2110", "1020"]
+    cards_4 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "0210", "2111", "1020"]
+    cards_5 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "0510", "2110", "1020"]
+    cards_6 = ["1022", "1122", "0100", "2021",
                "0010", "2201", "2111", "0020",
                "1102", "0210", "2110", "1020"]
+    return cards_1, cards_2, cards_3, cards_4, cards_5, cards_6
+
+def test_set(set_up_cards):
+    cards_1, cards_2, cards_3, cards_4, cards_5, cards_6 = set_up_cards
+    assert soln.count_sets(cards_6) == 6, "Not counting cards correctly"
+    with pytest.raises(ValueError) as excinfo:
+        soln.count_sets(cards_1)
+    assert excinfo.value.args[0] == "there are not exactly 12 cards"
+    with pytest.raises(ValueError) as excinfo:
+        soln.count_sets(cards_2)
+    assert excinfo.value.args[0] == "one or more cards has a character other than 0, 1, or 2"
+    with pytest.raises(ValueError) as excinfo:
+        soln.count_sets(cards_3)
+    assert excinfo.value.args[0] == "one or more cards does not have exactly 4 digits"
+    with pytest.raises(ValueError) as excinfo:
+        soln.count_sets(cards_4)
+    assert excinfo.value.args[0] == "the cards are not all unique"
+    with pytest.raises(ValueError) as excinfo:
+        soln.count_sets(cards_5)
+    assert excinfo.value.args[0] == "one or more cards has a character other than 0, 1, or 2"

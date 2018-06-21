@@ -160,10 +160,19 @@ def is_set(a, b, c):
     """
     counter = 0
     # print(list(a))
-    a = [int (k) for k in list(a)]
-
-    b = [int(k) for k in list(b)]
-    c = [int(k) for k in list(c)]
+    try:
+        a = [int(k) for k in list(a)]
+        b = [int(k) for k in list(b)]
+        c = [int(k) for k in list(c)]
+    except ValueError:
+        raise ValueError("one or more cards has a character other than 0, 1, or 2")
+    # print(type(a))
+    temp = a.copy()
+    temp.extend(b)
+    temp.extend(c)
+    print (temp)
+    if sum([1 if (int(i)>=3) else 0 for i in temp])!=0:
+        raise ValueError("one or more cards has a character other than 0, 1, or 2")
     for i in range(3):
         # print (a)
         if (a[i]==b[i] & b[i]==c[i]):
@@ -172,6 +181,11 @@ def is_set(a, b, c):
             counter += 1
     return counter==3
 
-
+cards_1 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "0210", "2110", "1020"]
+cards_2 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "0510", "2110", "1020"]
 # print (list(itertools.combinations(cards,3)))
-print (count_sets(cards))
+# print(count_sets(cards_2))
