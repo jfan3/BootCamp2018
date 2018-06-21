@@ -31,10 +31,10 @@ def test_operator():
     with pytest.raises(ValueError) as excinfo:
         soln.operator(4, 0, ")")
     assert excinfo.value.args[0] == "oper must be one of '+', '/', '-', or '*'"
-    assert soln.operator(1,2,"+")==3, "Failed for adding"
+    assert soln.operator(1, 2, "+")==3, "Failed for adding"
     assert soln.operator(1, 2, "-") == -1, "Failed for minusing"
     assert soln.operator(1, 2, "*") == 2, "Failed for multiplying"
-    assert soln.operator(2,1, "/") == 2, "Failed for dividing"
+    assert soln.operator(2, 1, "/") == 2, "Failed for dividing"
     with pytest.raises(ZeroDivisionError) as excinfo:
         soln.operator(4, 0, "/")
     assert excinfo.value.args[0] == "division by zero is undefined"
@@ -75,6 +75,11 @@ def test_complex_division(set_up_complex_nums):
     # assert number_1 / number_3 == soln.ComplexNumber(1/2, 2/9)
     # assert number_2 / number_3 == soln.ComplexNumber(5/2, 5/9)
     # assert number_3 / number_3 == soln.ComplexNumber(1, 1)
+    with pytest.raises(ValueError) as excinfo:
+        temp2 =soln.ComplexNumber(0,0)
+        number_1 / temp2
+    assert excinfo.value.args[0] == "Cannot divide by zero"
+
 
 def test_complex_str(set_up_complex_nums):
     number_1, number_2, number_3 = set_up_complex_nums
@@ -106,3 +111,13 @@ def test_month():
     assert soln.month_length("February", True) == 29, "failed for non-leap feb"
 
 # Problem 4: Write test cases for the Set game.
+# cards = ["1022", "1122", "0100", "2021",
+# "0010", "2201", "2111", "0020",
+# "1102", "0210", "2110", "1020"]
+
+@pytest.fixture
+def set_up_cards():
+    cards_1 = [ "1022", "1122", "1020"]
+    cards_1 = ["1022", "1122", "0100", "2021",
+               "0010", "2201", "2111", "0020",
+               "1102", "0210", "2110", "1020"]

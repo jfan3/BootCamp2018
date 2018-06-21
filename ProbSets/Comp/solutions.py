@@ -4,7 +4,7 @@
 <Date>
 """
 import math
-
+import itertools
 # Problem 1 Write unit tests for addition().
 # Be sure to install pytest-cov in order to see your code coverage change.
 
@@ -119,3 +119,59 @@ def month_length(month, leap_year=False):
     else:
         return None
 # Problem 5: Write code for the Set game here
+def count_sets(cards):
+    """Return the number of sets in the provided Set hand.
+    Parameters:
+    cards (list(str)) a list of twelve cards as 4-bit integers in
+    base 3 as strings, such as ["1022", "1122", ..., "1020"].
+    Returns:
+    (int) The number of sets in the hand.
+    Raises:
+    ValueError: if the list does not contain a valid Set hand, meaning
+    - there are not exactly 12 cards,
+    - the cards are not all unique,
+    - one or more cards does not have exactly 4 digits, or
+    - one or more cards has a character other than 0, 1, or 2.
+    """
+    results = []
+    combs = list(itertools.combinations(cards,3))
+    if len(cards)!=12:
+        raise ValueError("there are not exactly 12 cards")
+    elif len(set(cards))!=len(cards):
+        raise ValueError("the cards are not all unique")
+    elif sum([1 if len(i)!=4 else 0 for i in cards])!=0:
+        raise ValueError("one or more cards does not have exactly 4 digits")
+    else:
+        for comb in combs:
+            a,b,c = comb
+            if is_set(a,b,c) :
+                results.append(1)
+        return int(sum(results))
+
+def is_set(a, b, c):
+    """Determine if the cards a, b, and c constitute a set.
+    Parameters:
+    a, b, c (str): string representations of 4-bit integers in base 3.
+    For example, "1022", "1122", and "1020" (which is not a set).
+    Returns:
+    True if a, b, and c form a set, meaning the ith digit of a, b,
+    and c are either the same or all different for i=1,2,3,4.
+    False if a, b, and c do not form a set.
+    """
+    counter = 0
+    # print(list(a))
+    a = [int (k) for k in list(a)]
+
+    b = [int(k) for k in list(b)]
+    c = [int(k) for k in list(c)]
+    for i in range(3):
+        # print (a)
+        if (a[i]==b[i] & b[i]==c[i]):
+            counter += 1
+        elif (a[i] !=b[i]&b[i]!=c[i]&a[i]!=c[i]):
+            counter += 1
+    return counter==3
+
+
+# print (list(itertools.combinations(cards,3)))
+print (count_sets(cards))
