@@ -1,0 +1,481 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\usepackage{xparse}
+\newcommand{\powerset}{\rangleaisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+
+\NewDocumentCommand{\INTERVALINNARDS}{ m m }{
+	#1 {,} #2
+}
+\NewDocumentCommand{\interval}{ s m >{\SplitArgument{1}{,}}m m o }{
+	\IfBooleanTF{#1}{
+		\left#2 \INTERVALINNARDS #3 \right#4
+	}{
+		\IfValueTF{#5}{
+			#5{#2} \INTERVALINNARDS #3 #5{#4}
+		}{
+			#2 \INTERVALINNARDS #3 #4
+		}
+	}
+}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{Problem Set 3}
+
+\author{Fiona Fan}
+
+\date{In collaboration with Zeshun, Shirley and Zunda}
+	% Note: when you omit this command, the current dateis automatically included
+ 
+\maketitle 
+	% tells latex to follow your header (e.g., title, author) commands.
+
+
+%\section*{Section 1}
+
+\paragraph{2}
+$D=\begin{bmatrix}
+0&1&0\\0&0&2\\0&0&0
+\end{bmatrix}$. \\ 
+Let $\det(\lambda I-D)=0$\\
+$\begin{vmatrix}
+\lambda&-1&0\\0&\lambda&-2\\0&0&\lambda
+\end{vmatrix}=\lambda^3=0$\\
+$\Rightarrow \lambda=0$\\
+$\therefore$ Algebraic multiplicity is 3. The corresponding eigenvector is $\begin{bmatrix}
+1\\0\\0
+\end{bmatrix}$\\
+$\therefore$Geometric multiplicity is 1.
+\paragraph{4}
+\subparagraph{i)} 
+Let A = $\begin{bmatrix}
+a&b\\c&d
+\end{bmatrix}
+$, then $A^H=A$ implies that $b=\bar{c}$. \\
+Recall that if $z\in \mathbb{C}$, then $z\bar{z}=|z|^2\geq 0$\\
+Now, $p(\lambda)=\lambda^2-(a+d)\lambda+(ad-bc)$\\
+$\Delta=(a+d)^2-4(ad-bc)=(a-d)^2+4b\bar{b}=(a-d)^2+4|b|^2\geq 0$\\
+$\Rightarrow$ Real roots. 
+\subparagraph{2}
+Suppose $\lambda$ is an eigenvalue of A where $A^H=-A$. $x$ is the corresponding eigenvector. \\
+Then, $\langle Ax, x\rangle=\langle \lambda x, x\rangle=\bar{lambda}\langle x, x\rangle$. \\
+Also, $\langle Ax, x\rangle=\langle x, A^Hx\rangle=\langle x, -Ax\rangle=-\langle x,\lambda x\rangle=-\lambda \langle x, x\rangle$. \\
+So we have $\bar{\lambda}=-\lambda$\\
+$\Rightarrow \lambda$ is pure imagery.  
+\paragraph{6}
+Suppose A is an upper triangular matrix.\\
+A=$\begin{bmatrix}
+a_1& & &*\\
+ &a_2& & \\
+ & &\ddots& \\
+ 0& & & a_n 
+\end{bmatrix}$\\
+Then the characteristic polynomial is \\
+$\det (zI-A)=\begin{vmatrix}
+z-a_1& & &*\\
+&z-a_2& & \\
+& &\ddots& \\
+0& & & z-a_n 
+\end{vmatrix}=\Pi_{i=1}^n(z-a_i)=0$\\
+Note that this polynomial has n zeros, which are $a_1, a_2,\dots a_n$ respectively.\\
+The case of upper triangular matrix is the same. 
+
+\paragraph{8}
+\subparagraph{1} Since $V=span(s)$, it suffices to show that the four vectors are linearly independent. \\
+Let $a \sin(x)+b\cos(x)+c\sin(2x)+d\cos(2x)=0,\quad \forall x\in \mathbb{R}.$\\
+Let $x=0$: $b+d=0$\\
+Let $x=\frac{\pi}{2}$: $a-d=0$\\
+Let $x=\pi$: $-b+d=0$\\
+Let $x=\frac{\pi}{4}$: $a \sin(\frac{\pi}{4})+b\cos(\frac{\pi}{4})+c\sin(\frac{\pi}{2})+d\cos(\frac{\pi}{2})=0$\\
+From the above four conditions we can get $a=0, b=0, c=0, d=0$. \\
+Since the only case that can let $a \sin(x)+b\cos(x)+c\sin(2x)+d\cos(2x)=0,\quad \forall x\in \mathbb{R}.$ is when $a=b=c=d=0$,\\
+$\Rightarrow$ They are linearly independent. 
+\subparagraph{2} 
+$D=\begin{bmatrix}
+0&-1&0&0\\
+1&0&0&0\\
+0&0&0&2\\
+0&0&2&0\\
+\end{bmatrix}$
+\subparagraph{3} 
+$V_1=\{\sin x,\cos x\}$, $V_2=\{\sin 2x,\cos 2x\}$
+\paragraph{13}
+To diagonalize A, we first need to find eigenvalues and eigenvectors. \\
+$p(\lambda)=\lambda^2-1.4\lambda+0.4=0$\\
+$\Rightarrow \lambda_1=1, \lambda_2 = \frac{2}{5}$\\
+And $\Sigma_1=span([2,1]^T), \Sigma_2=span([1,-1]^T)$\\
+So A is semisimple.\\
+Let $p=\begin{bmatrix}
+2&1\\1&-1
+\end{bmatrix}, then p^{-1}=\begin{bmatrix}
+\frac{1}{3}&\frac{1}{3}\\\frac{1}{3}&-\frac{2}{3}
+\end{bmatrix}$.\\
+$D=\begin{bmatrix}
+1&0\\0&0.4
+\end{bmatrix}$\\
+Then $D=p^{-1}Ap$.\\
+\paragraph{15}
+Since $A\in M_n(\mathbb{F})$ is semisimple, we can diagonalize $A=pDp^{-1}$, where Dd is diagonalized, and $\{\lambda_i\}_1^n$ are the diagonal entries of D. \\
+Now, $f(A)=f(pDp^{-1})$\\
+$=a_0 I+ a_1pDp^{-1}+\dots+a_npD^np^{-1}$\\
+$=p[a_0I+a_1D+\dots+a_nD^n]p^{-1}$\\
+$=pf(D)p^{-1}$\\
+Observe that f(A) and f(D) are similar, so they have the same eigenvalues. \\
+Also note that $f(D)$ is also diagonal, so each entry along the diagonal is $f(D)_{ii}=a_0+a_1d_{ii}+\dots+a_nd_{ii}^n=f(d_{ii})$, where $D=[d_{ij}]_{ij}$\\
+Hence, the eigenvalues of $f(D)$ are just its diagonals, which are $\{f(\lambda_1),f(\lambda_2),\dots,f(\lambda_n) \}$
+\paragraph{16}
+\subparagraph{1}
+$A=pD^np_{-1}$\\
+$=\begin{bmatrix}
+2&1\\1&-1
+\end{bmatrix}\begin{bmatrix}
+1&0\\0&0.4^n
+\end{bmatrix}\begin{bmatrix}
+\frac{1}{3}&\frac{1}{3}\\\frac{1}{3}&-\frac{2}{3}
+\end{bmatrix}$\\
+$\therefore lim_{n\to\infty}A^n=\begin{bmatrix}
+2&1\\1&-1
+\end{bmatrix}\begin{bmatrix}
+1&0\\0&0
+\end{bmatrix}\begin{bmatrix}
+\frac{1}{3}&\frac{1}{3}\\\frac{1}{3}&-\frac{2}{3}
+\end{bmatrix}$\\
+$=\begin{bmatrix}
+\frac{2}{3}&\frac{2}{3}\\\frac{1}{3}&\frac{1}{3}
+\end{bmatrix}$\\
+Let $B=\begin{bmatrix}
+\frac{2}{3}&\frac{2}{3}\\\frac{1}{3}&\frac{1}{3}
+\end{bmatrix}$, then it follows immediately from the definition of limit. 
+\subparagraph{2}
+The choice of norm does not affect the answer. 
+\subparagraph{3}
+Let $f(x)=3+5x+x^3$, then the eigenvalues of $f(A)$ are $f(\lambda_1)= f(1)=9, f(\lambda_2)= f(0.4)=5.064$. 
+\paragraph{18}
+Take $\vec{y}$ an eigenvector corresponding to $\lambda$. Then, \\
+$x^TAy=x^T\lambda y=(\lambda x^Ty)$\\
+$\Rightarrow x^TA=\lambda x^T$
+\paragraph{20}
+Let $B=U^HAU$, then,\\
+$B^H=U^HA^HU=U^HAU=B$, since $A^H=A$
+
+\paragraph{24}
+\subparagraph{1}
+$p(\vec{x})=\frac{\langle x,Ax\rangle}{||x||^2}$\\
+Observe that the denominator is always a real number. Hence to show that $p(\vec{x})\in \mathbb{R}, it suffices to show that \langle x, Ax\rangle\in\mathbb{R}$. \\
+Now $\langle x,Ax\rangle=\langle A^H,x\rangle=-\langle Ax,x\rangle$\\
+Since by definition, $\langle x,Ax\rangle=\bar{\langle Ax,x\rangle}$, we have $\langle Ax,x\rangle=\bar{\langle Ax,x\rangle} \in \mathbb{R}$\\
+This implies $$\langle x,Ax\rangle \in \mathbb{R}$$\\
+$\Rightarrow p(x)\in \mathbb{R}$
+\subparagraph{2}
+If $A^H=-A$, then \\
+$\langle x,Ax\rangle=\langle A^H,x\rangle=-\langle Ax,x\rangle$\\
+Also, $\langle x,Ax\rangle=\bar{\langle Ax,x\rangle}$\\
+$\therefore \bar{\langle Ax,x\rangle}= -\langle Ax,x\rangle$\\
+This implies $\langle x,Ax\rangle=\bar{\langle Ax,x\rangle} \in \mathbb{C}\setminus\mathbb{R} \cup\{0\}$\\
+Hence $p(\vec{x})=\frac{\langle x,Ax\rangle}{||x||^2}$ is pure imaginary number. 
+\paragraph{25}
+\subparagraph{1}
+Since $A\in M_n(\mathbb{C})$ is a normal matrix, its eigenspace $\{x_1,x_2,\dots, x_n \}$ spans $\mathbb{C}^n$.\\
+Observe that $\forall j=1,2,\dots, n$, \\
+$(x_1x_1^H+x_2x_2^H+\dots+x_nx_n^H)x_j=x_1x_1^Hx_j+x_2x_2^Hx_j+\dots+x_nx_n^Hx_j=x_j$\\
+This holds for any j.\\ 
+Since $\{x_1,x_2,\dots, x_n \}$ spans $\mathbb{C}^n$, $\forall \vec{v}=\mathbb{C}^n$, $\vec{v}=\sum a_i\vec{x}_i$\\
+Let $B=x_1x_1^H+x_2x_2^H+\dots+x_nx_n^H$, then $B\vec{v}=\sum a_iB\vec{x}_i=\sum a_i\vec{x}_i=\vec{v}$.\\
+Let $\vec{v}=\vec{e_1},\vec{e_2},\dots,\vec{e_n}$ respective, then we get \\
+$Be_1=e_1, Be_2=e_2, \dots, Be_n=e_n $\\
+Hence $B=I$
+
+\subparagraph{2}
+Since A is a normal matrix and $\{x_1, x_2,\dots,x_n \}$ forms an orthonormal eigenbasis, A admits a diagonalization. \\
+$A=pDp{-1}=pDp^H$, where \\
+$p=[x_1, x_2,\dots,x_n]\quad D=\begin{bmatrix}
+\lambda_1& & &0\\
+ &\lambda_2& & \\
+& &\ddots& \\
+0& & & \lambda_n 
+\end{bmatrix}$\\
+$p^{-1}=p^H=\begin{bmatrix}
+x_1\\x_2\\\vdots\\x_n
+\end{bmatrix}$, since p is an orthonormal matrix. \\
+Hence, 
+$A=[x_1, x_2,\dots,x_n]\begin{bmatrix}
+\lambda_1& & &0\\
+&\lambda_2& & \\
+& &\ddots& \\
+0& & & \lambda_n 
+\end{bmatrix}\begin{bmatrix}
+x_1^H\\x_2^H\\\vdots\\x_n^H
+\end{bmatrix}=\sum \lambda_ix_ix_i^H$
+\paragraph{27}
+Suppose $\begin{bmatrix}
+a_{11}& &\dots &a_{1n}\\
+a_{21}&\lambda_2& &a_{2n}\\
+\vdots& & &\vdots\\
+a_{n1}& & & a_{nn}
+\end{bmatrix}$\\ 
+By definition, $\forall x, \quad x^HAx>0$\\
+Now, let $x=\begin{bmatrix}
+1\\0\\\vdots\\0
+\end{bmatrix}=e_i^{-1}$\\
+then $e_1^HAe_1=\begin{bmatrix}
+1&0&\dots&0
+\end{bmatrix}\begin{bmatrix}
+a_{11}\\a_{21}\\\vdots\\a_{n1}
+\end{bmatrix}=a_{11}>0$\\
+Similarly, let $x=e_2,e_3,\dots, e_n$\\
+we have $a_{22}>0, a_{33}>0,\dots,a_{nn}>0$\\
+Here all diagonal elements are positive and real. 		
+\paragraph{28}
+\textbf{Proof:}
+
+First we introduce the following lemmas used in the proof.
+
+\begin{itemize}
+	\item Lemma 1: The diagonals of a positive semi-definite matrix are greater than or equal to zero. (Proof similar to exercise 4.27)
+	\item Lemma 2: $tr(AB) = tr(BA)$ (Proof can be found in Problem Set 2)
+	\item Lemma 3: If $A \in M_{n}(\mathbb{F})$ is a positive semi-definite matrix, $D \in M_{n}(\mathbb{F})$ is a diagonal matrix with non-negative diagonals, then $0 \leq tr(AD) \leq tr(A)tr(D)$.
+	\begin{proof}
+		Suppose $$
+		A = 
+		\begin{bmatrix}
+		a_{11} & a_{12} & \dots & a_{1n} \\
+		a_{21} & a_{22} & \dots & a_{2n} \\
+		\vdots   \\
+		a_{n1} & a_{n2} &  \dots & a_{nn} 
+		\end{bmatrix}
+		$$, $$
+		D = 
+		\begin{bmatrix}
+		d_{11}  \\
+		& d_{22} \\
+		& & \ddots \\
+		& &  & & d_{nn} 
+		\end{bmatrix}
+		$$,
+		
+		then $tr(AD) = \sum^{n}_{i=1} a_{ii}d_{i} \geq 0$, since $a_{ii} \geq 0$ and $d_{i} \geq 0$ for $\forall i$ 
+		
+		$tr(A)tr(D) = (\sum^{n}_{i=1} a_{ii})(\sum^{n}_{i=1} d_{i}) = \sum^{n}_{i=1} a_{ii}d_{i} + \sum_{i \neq j} a_{ii}d_{j} \geq \sum^{n}_{i=1} a_{ii}d_{i} $
+		
+		$\Rightarrow tr(A)tr(D) \geq tr(AD) \geq 0$
+	\end{proof}
+\end{itemize}
+
+Now since $B$ is a positive semi-definite matrix, it admits a diagonalization s.t. $B = PDP^{-1}= PDP^{H}$, where $$P = \begin{bmatrix}
+x_{1} & x_{2} & \cdots & x_{n}
+\end{bmatrix}$$ is an orthonormal eigenbasis,
+$$
+D = 
+\begin{bmatrix}
+d_{11}  \\
+& d_{22} \\
+& & \ddots \\
+& &  & & d_{nn} 
+\end{bmatrix}
+$$ is diagonal matrix with $d_{i} \geq 0 \quad \forall i$.
+
+Then $tr(AB) = tr (APDP^{H}) = tr(P^{H}APD) \leq tr(P^{H}AP)tr(D) \\ = tr(APP^{H})tr(D) = tr(A)tr(D) = tr(A)tr(B)$.
+
+Meanwhile, 
+$||AB||_F^2 = \text{ tr}(AA^HBB^H) \leq \text{ tr}(AA^H) \text{ tr}(BB^H) = ||A||_F ||B||_F^2 $,
+
+which makes $|| \cdot ||_F$ a matrix norm.
+\paragraph{31} 
+\subparagraph{1}
+Suppose A has rank r, then $A^HA$ is positive definite and has r distinct eigenvalues. \\
+Let $s=\{\vec{v_1},\vec{v_2},\dots,\vec{v_n} \}$ be an orthonormal eigenspace of $A^HA$, and $\{\sigma_1^2,\sigma_2^2,\dots,\sigma_n^2 \}$ be the corresponding eigenvectors, where $\sigma_1^2\geq\sigma_2^2\geq\dots\geq\sigma_n^2$.\\
+Since $s$ spans $\mathbb{F}^n$, $\forall \vec{x}\in \mathbb{F}^n$, we have \\
+$\vec{x}=\sum_{i=1}^nc_i\vec{v_i}$,  $c_I\in]mathbb{F}, \forall i$, and \\
+$||x||_2=\sqrt{(\sum c_iv_i^T)(\sum c_iv_i)}=\sqrt{(\sum c_i^2)}$ \\
+Hence if $||x||_2=1, then \sum_{i=1}^n c_i^2=1$\\
+Now, observe that $\norm{Ax}_2^2=\langle Ax,Ax \rangle=(Ax)^HAx=x^HA^HAx$\\
+$=(\sum_{i=1}^nc_i\vec{v_i}^H)(A^HA)(\sum_{i=1}^nc_i\vec{v_i})$\\
+$=(\sum_{i=1}^nc_i\vec{v_i}^H)(\sum_{i=1}^nc_iA^HA\vec{v_i}^H)$\\
+$=(\sum_{i=1}^nc_i\vec{v_i}^H)(\sum_{i=1}^nc_i\sigma2\vec{v_i}^H)$、、
+$=\sum c_i^2\sigma^2$, where $s=\{v_1,v_2,\dots,v_n \}$\\
+Note that when $\sigma c_i^2=1$, and $\sigma_1^2\geq\sigma_2^2\geq\dots\geq\sigma_n^2$,\\
+$\sum c_i^2\sigma_i^2\leq \sigma_1^2$\\
+Hence, $\norm{A}_2^2=\sup_{\norm{x}_2=1}\norm{Ax}_2^2=\sigma_1^2$\\
+$\Rightarrow \norm{A}_2=\sigma_1$
+\subparagraph{2}
+Since $A=U\Sigma V^H$\\
+$A^{-1}=(U\Sigma V^H)^{-1}=(V^H)^{-1}\Sigma^{-1}(U)^{-1}=V\Sigma^{-1}U^H$\\
+$\Rightarrow $ This is still an SVD of $A^{-1}$\\
+And $\Sigma^{-1}=\begin{bmatrix}
+\frac{1}{\sigma_1}&&\\
+&\ddots&\\
+&&\frac{1}{\sigma_n}
+\end{bmatrix}$\\
+i.e. The singular values of $A^{-1} are$ \\
+$\frac{1}{\sigma_1}\leq\dots\leq\frac{1}{\sigma_n}$\\
+By(1), $\norm{A^{-1}}_2$ is the largest singular value of $A^{-1}$, i.e. $\frac{1}{\sigma_n}$
+\subparagraph{3}
+Since $A=U\Sigma V^H$\\
+$A^H=(V^H)^H\Sigma^HU^H=V\Sigma^HU=V\Sigma U$\\
+$\Rightarrow A^H$ and A has the same singular values. \\
+So $\norm{A^H}_2^2=\norm{A}_2^2=\sigma_1^2$\\
+$(A^T)$ is just $A^H$ restricted on $\mathbb{R}$.\\
+So $\norm{A^T}_2^2=\norm{A^H}_2^2$\\
+By the previous argument, we know that $A^HA$ has an orthonormal eigenbasis $\{v_1, v_2, \dots,v_n \}$, \\
+and $\forall \norm{x}_2=1$,   $\norm{A^HAx}_2=\norm{A^HA\sum c_iv_i}_2=\sqrt{(\sum c_i\sigma_i^2 v_i^T)(\sum c_i\sigma_i^2 v_i)}=\sqrt{\sum c_i\sigma_i^4}\leq \sigma_1^2$ \\
+Hence $\norm{A^HA}_2=\sup_{\norm{x}=1}\norm{A^HAx}=\sigma_1^2$\\
+It follows that $\norm{A^HA}_2=\norm{A}_2^2=\norm{A^H}_2^2=\norm{A^T}_2^2=\sigma_1^2$
+\subparagraph{4}
+Lemma: Let Q be an orthonormal matrix, then $||AQ||_{2} =  ||A||_{2}$.
+\begin{proof}
+	Let $S_{1}$ = \{ $||AQ\vec{x}||, ||x||_{2} = 1$ \},
+	$S_{2}$  = \{ $||Ax||, ||x||_{2} = 1$ 
+	\begin{proof}
+		Since Q is orthonormal, so Q is also invertible.\\
+		$\forall s_{1} \in S_{1}, \exists x, \norm{x}=1, \quad s.t. \norm{AQx}_2=s_1$\\
+		Now, let $y=Qx$, it follows that $\norm{Qx}=\norm{y}_2=1$\\
+		Since orthonormal matrix preserves length, $\norm{Ay}_2=\norm{AQx}_2=s_1\in S_2$\\
+		i.e. $S_1\subset S_2$\\
+		$\forall s_2\in S_2, \exists x, \norm{x}_2=1 \quad s.t. \norm{Ax}_2=s_2$\\
+		Now, let $y=Q^{-1}x$, then $\norm{y}_2=\norm{Q^{-1}x}_2=1$\\
+		Hence $\norm{AQy}_2=\norm{AQQ^{-1}x}_2=\norm{Ax}_2=s_2\in S_1$\\
+		i.e. $S_2\subset S_1$\\
+		$\therefore \norm{AQ}_2=\sup S_1=\sup S_2=\norm{A}_2$\\
+	\end{proof}
+Now $\norm{UAV}_2=\norm{UA}_2$ by lemma since V is an orthonormal matrix.\\
+$\norm{UA}_2=\sup_{\norm{x}_2=1}\sqrt{(UAx)^H(UAx)}=\sup_{\norm{x}_2=1}\sqrt{x^HA^HU^HUAx}$\\
+$=\sup_{\norm{x}_2=1}\sqrt{\langle Ax, Ax \rangle}=\norm{A}_2$\\
+Hence, $\norm{UAV}_2=\norm{UA}_2=\norm{A}_2$
+\end{proof}
+\paragraph{32}
+\subparagraph{1}
+We need the following lemmas:\\
+\begin{itemize}
+	\item lemma 1: if $A,B\in M_n(\mathbb{F}), then tr(AB)=tr(BA)$
+	\item lemma 2: $||A||^2_p=tr(A^TA)$
+	\begin{proof}
+		let $A=\begin{bmatrix}
+			a_{11}&\dots&a_{1n}\\
+			\vdots& &\vdots\\
+			a_{1m}&\dots&a_{mn}
+		\end{bmatrix}$\\
+		Then $A^T=\begin{bmatrix}
+		a_{11}&\dots&a_{m1}\\
+		\vdots& &\vdots\\
+		a_{1n}&\dots&a_{mn}
+		\end{bmatrix}$\\
+		Observe that $(A^TA)_{nm}=a_{1n}^2+a_{2n}^2+\dots+a_{mn}^2$\\
+		$\Rightarrow tr(A^TA)=||A||_p^2$
+	\end{proof}
+\end{itemize}
+Now, $||UAV||_1^2=tr((UAV)^T(UAV))=tr(V^TA^TU^TUAV)=tr(V^TA^TAV)=tr(VV^TA^A)=tr(A^TA)=||A||_1^2$\\
+$\Rightarrow ||UAV||_2=||A||_2$
+
+\subparagraph{2}
+Observe that $A=U\Sigma V^T$, with U and $V^T$ orthonormal and \\
+$\Sigma=\begin{bmatrix}
+\sigma_1& & & \\
+&\ddots& & \\
+&&\sigma_r&\\
+&&&0
+\end{bmatrix}$
+Now, $\norm{A}_p^2=tr(A^TA)=tr((U\Sigma V)^T(U\Sigma V))=tr(U\Sigma^TU^TU\Sigma V^T)=tr(U\Sigma^2 V^T)$\\
+$=tr(\Sigma^2)=\sum_{i=1}^r\sigma_i^2$\\
+Hence $\norm{A}_p=\sqrt{\sum_{i=1}^r\sigma_i^2}$
+
+\paragraph{33}
+Note that the $Y^{H}Ax$ will be a field element. Consider it as a linear map $Y^{H}Ax: \mathbb{F} \to \mathbb{F}$, then the spectral norm of this map is:
+
+$||Y^{H}Ax ||_{2} = \text{sup}_{f \in \mathbb{F}}\frac{||(Y^{H}Ax)f||_{2}}{||f||_{2}} = |Y^{H}Ax|$
+
+, where the first norm is spectral norm and the norm in fraction is the standard 2-norm.
+
+\paragraph{36}
+One example can be  $A=\begin{bmatrix}
+4&0\\3&5
+\end{bmatrix}$\\
+then $A^TA=\begin{bmatrix}
+25&-15\\-15&25
+\end{bmatrix}$\\
+$\det(A^TA-\lambda I)=\lambda^2-50\lambda+400=0$\\
+$\lambda_1=40, \lambda_2=10$\\
+Thus its singular value are $s_1=\sqrt{40}, s_2=\sqrt{10}$\\
+To calculate its eigenvalues, \\
+$\det(A-\lambda I)=\lambda^2-9\lambda+20=0$\\
+Thus its eigenvalues are $\lambda_1=4,\lambda_2=5$, which are different from its singular values. 
+\paragraph{38}
+
+(i) Suppose $U \Sigma V^{H}$ is an SVD of A, then $A^\dagger = V \Sigma^{-1} U^H$
+
+$
+AA^\dagger A = (U \Sigma V^H) (V \Sigma^{-1} U^H) (U \Sigma V^H) = U \Sigma V^H = A
+$
+
+\noindent (ii) 
+
+$A^\dagger A A^\dagger = (V \Sigma^{-1} U^H) (U \Sigma V^H) (V \Sigma^{-1} U^H) = V \Sigma^{-1} U^H = A^\dagger $
+
+\noindent (iii) 
+
+$
+(AA^\dagger)^H = ((U \Sigma V^H) (V \Sigma^{-1} U^H))^H = U \Sigma^{-1}V^H V \Sigma U^H = UU^H = AA^\dagger
+$
+
+\noindent (iv)
+
+$
+(A^\dagger A)^H = ((V \Sigma^{-1} U^H) (U \Sigma V^H))^H = V \Sigma U^H U \Sigma^{-1} V^H = VV^H = A^\dagger A
+$
+
+\noindent (v)
+
+By prop (iii) $\Rightarrow$ $A A^\dagger$ is hermitian. 
+
+Also by prop (i), $AA^\dagger A A^\dagger = A A^\dagger \Rightarrow$ $A A^\dagger$ is idempotent.
+
+Next we will check whether $\mathcal{R}(AA^\dagger) = \mathcal{R} (A)$.
+
+It is trivially $\mathcal{R}(A A^\dagger) \subset \mathcal{R}(A)$, and by prop(i) $\Rightarrow$ $ \mathcal{R}(A) \subset \mathcal{R}(A A^\dagger)$
+
+$\Rightarrow$ $\mathcal{R}(AA^\dagger) = \mathcal{R} (A)$
+
+\noindent (vi) 
+
+By prop (iv) $A^\dagger A$ is hermitian. 
+
+Also by prop (ii) $A^\dagger A A^\dagger A = A^\dagger A \Rightarrow$ $A^\dagger A$ is idempotent
+
+Next we will check whether $\mathcal{R}(A^\dagger A) = \mathcal{R} (A^H)$
+
+By prop (iv), 
+$AA^\dagger = (AA^\dagger)^H = A^H (A^\dagger)^H \implies \mathcal{R}(A^\dagger A) \subset \mathcal{R} (A^H) $
+
+Then we take the hermitian of both sides of prop (i),
+
+we have $ (A^\dagger A)^H A^H = (A^\dagger A)^H A^H A^H \Rightarrow \mathcal{R} (A^H) \subset \mathcal{R}(A^\dagger A) $
+
+$\Rightarrow$ $\mathcal{R}(A^\dagger A) = \mathcal{R} (A^H)$
+
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
