@@ -31,8 +31,8 @@ def plot_routine(n_agents, grid, dim, num_points):
     
 #======================================================================    
 # Routine compute the errors
-def ls_error(n_agents, t1, t2, num_points, itheta):
-    file=open('errors'+str(theta[itheta])+'.txt', 'w')
+def ls_error(n_agents, t1, t2, num_points):
+    file=open('errors.txt', 'w')
     
     np.random.seed(0)
     unif=np.random.rand(num_points, n_agents)
@@ -46,8 +46,8 @@ def ls_error(n_agents, t1, t2, num_points, itheta):
         v_prev=TasmanianSG.TasmanianSparseGrid()
         v_next=TasmanianSG.TasmanianSparseGrid()
         
-        v_prev.read("valnew_1." +"str(theta[itheta])"+ str(i) + ".txt")
-        v_next.read("valnew_1." +"str(theta[itheta])"+ str(i+1) + ".txt")
+        v_prev.read("valnew_1." + str(i) + ".txt")
+        v_next.read("valnew_1." + str(i+1) + ".txt")
         
         diff=v_next.evaluateBatch(k_sample) - v_prev.evaluateBatch(k_sample)
         max_abs_diff=np.amax(np.fabs(diff))
@@ -63,4 +63,10 @@ def ls_error(n_agents, t1, t2, num_points, itheta):
     file.close()
     
     return 
+        
 #======================================================================
+        
+        
+        
+        
+    
