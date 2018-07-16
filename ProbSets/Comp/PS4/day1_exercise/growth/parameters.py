@@ -17,7 +17,7 @@ import numpy as np
 iDepth=1
 iOut=1         # how many outputs
 which_basis = 1 #linear basis function (2: quadratic local basis)
-refinement_level = 5 
+refinement_levels = [5,10,15]
 fTol = 1.E-5
 # control of iterations
 numstart = 0   # which is iteration to start (numstart = 0: start from scratch, number=/0: restart)
@@ -30,7 +30,7 @@ No_samples = 1000
 
 # Model Paramters
 
-n_agents=2  # number of continuous dimensions of the model
+ns_agents=[2,4,10,15]  # number of continuous dimensions of the model
 
 beta=0.8
 rho=0.95
